@@ -7,14 +7,19 @@
 </script>
 
 <template>
-  <n-space id="ToolsFrame" justify="space-between">
+  <n-space id="ToolsSpace" justify="space-between">
     <div id="LeftTools">
-      <n-button text>
+    <n-button-group>
+      <n-button quaternary>
         文件
       </n-button>
+      <n-button quaternary>
+        关于
+      </n-button>
+    </n-button-group>
     </div>
-    <div>
-      <n-button-group id="MidTools">
+    <div id="MidTools">
+      <n-button-group>
         <n-button round secondary type="success">
           <IconPlay />
         </n-button>
@@ -45,25 +50,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  #ToolsFrame {
-    margin-top: 10%;
-    height: auto;
-    width: auto;
-    background-color: #323232;
+
+  $ToolsPaddingHeight: 3px;
+  $ToolsPaddingWidth: 3px;
+
+  #ToolsSpace {
+    padding-top: $ToolsPaddingHeight;
+    padding-bottom: $ToolsPaddingHeight;
+    padding-left: $ToolsPaddingWidth;
+    padding-right: $ToolsPaddingWidth;
     align-items: center;
-  }
-
-  $ToolsBorder:10px;
-
-  #LeftTools {
-    padding-left: $ToolsBorder;
-  }
-
-  #RightTools {
-    padding-right: $ToolsBorder;
-  }
-
-  #MidTools {
-    width: auto;
   }
 </style>

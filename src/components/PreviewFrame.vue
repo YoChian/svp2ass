@@ -1,5 +1,7 @@
 <template>
-  <div id="PreviewFrame"></div>
+  <div id="PreviewSpace">
+    <div class="TitleBar">预览窗口</div>
+  </div>
 </template>
 
 <script>
@@ -15,10 +17,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  #PreviewFrame {
-    display: block;
-    height: auto;
-    width: 60%;
-    background-color: #2d2d2d;
-  }
+
+#PreviewSpace {
+  height: 100%;
+  background-color: #2d2d2d;
+}
+
 </style>

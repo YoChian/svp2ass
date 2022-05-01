@@ -1,6 +1,6 @@
 <script setup>
 import { zhCN, dateZhCN } from "naive-ui";
-import { NLayout, NLayoutHeader, NLayoutContent, NLayoutFooter, NLayoutSider } from 'naive-ui';
+import { NLayout, NLayoutHeader, NLayoutContent, NLayoutFooter, NLayoutSider, NSpace } from 'naive-ui';
 import { defineComponent, computed } from 'vue'
 import { darkTheme, useOsTheme } from 'naive-ui'
 //导入自定义的组件
@@ -10,40 +10,43 @@ import MIDIFrame from './components/MIDIFrame.vue';
 import PreviewFrame from "./components/PreviewFrame.vue";
 import EditFrame from "./components/EditFrame.vue";
 
-defineProps({
-  theme: Object
-})
+//根据系统主题设置深色模式
+var osThemeRef = useOsTheme()
+var usingTheme = computed(() => (osThemeRef.value === 'dark' ? null : darkTheme));
 
 defineComponent({
-  setup () {
-    const osThemeRef = useOsTheme()
-    return {
-      theme: computed(() => (osThemeRef.value === 'dark' ? null : darkTheme)),
-      osTheme: osThemeRef
-    }
-  }
+  NConfigProvider,
+  NLayout,
+  NLayoutHeader,
+  NLayoutContent,
+  NLayoutSider,
+  NLayoutFooter,
+  NSpace
 })
 </script>
 
 <template>
-  <n-config-provider :locale="zhCN" :datelocale="dateZhCN" :theme="theme" :theme-overrides="{ common: { fontWeightStrong: '600' } }">
-    <n-layout id="AppFrame">
-      <n-header>
+  <n-config-provider :locale="zhCN" :datelocale="dateZhCN" :theme="usingTheme" :theme-overrides="{ common: { fontWeightStrong: '600' } }">
+    <n-layout id="AppFrame" position="absolute" content-style="display:flex; flex-direction:column">
+      <n-layout-header id="ToolsFrame">
         <ToolsFrame />
-      </n-header>
-      <n-content>
-        <n-layout>
-          <PreviewFrame /><EditFrame />
-        </n-layout>
-      </n-content>
-      <n-footer>
+      </n-layout-header>
+      <n-layout-content id="MidFrame" content-style="display:flex;width:100vw">
+          <div id="PreviewFrame">
+            <PreviewFrame />
+          </div>
+          <div id="EditFrame">
+            <EditFrame />
+          </div>
+      </n-layout-content>
+      <n-layout-footer id="MIDIFrame">
         <MIDIFrame />
-      </n-footer>
+      </n-layout-footer>
     </n-layout>
   </n-config-provider>
 </template>
 
-<style>
+<style lang="scss">
 #app {
   font-family: Lato,FiraCode;
   -webkit-font-smoothing: antialiased;
@@ -54,6 +57,40 @@ defineComponent({
 
 #AppFrame {
   height: 100vh;
+}
+
+#ToolsFrame {
+  height: auto;
+  background-color: #323232;
+}
+
+#MIDIFrame {
+  height: 35vh;
+  min-height: 100px;
+  background-color: #000000;
+  padding: 1px;
+}
+
+#PreviewFrame {
+  width: 150%;
+  background-color: #000000;
+  padding: 1px;
+}
+
+#EditFrame {
+  width: inherit;
+  background-color: #000000;
+  padding: 1px;
+}
+
+.TitleBar {
+  $TapRadius: 0px;
+  $TapMargin: 0px;
+  background-color: #424242;
+  margin-left: $TapMargin;
+  margin-right: $TapMargin;
+  border-top-left-radius: $TapRadius;
+  border-top-right-radius: $TapRadius;
 }
 
 @font-face {

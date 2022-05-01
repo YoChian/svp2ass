@@ -1,5 +1,7 @@
 <template>
-  <div id="EditFrame"></div>
+  <div id="EditSpace">
+    <div class="TitleBar">编辑窗口</div>
+  </div>
 </template>
 
 <script>
@@ -15,9 +17,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  #EditFrame {
-    height: auto;
-    width: auto;
-    background-color: #2d2d2d;
-  }
+
+#EditSpace {
+  height: 100%;
+  background-color: #2d2d2d;
+}
+
 </style>

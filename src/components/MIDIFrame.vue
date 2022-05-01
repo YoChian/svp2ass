@@ -1,6 +1,6 @@
 <template>
-  <div id="MIDIFrame" @dragover="fileDragOver" @dragleave="fileDragLeave" @drop="fileDrop">
-    <DragnDrop v-if="isDraging" :status="isHovering" />
+  <div id="MIDISpace" @dragover.stop.prevent.capture="isHovering=true" @dragleave.stop.prevent.capture="isHovering=false" @drop.stop.prevent.capture="fileDrop">
+    <DragnDrop v-if="!hasFile" :status="isHovering" />
   </div>
 </template>
 
@@ -11,28 +11,28 @@ export default {
   name: "MIDIFrame",
   created() {},
   data() {
-    return {};
+    return {
+      hasFile: false,
+      isDraging: false,
+      isHovering: false
+    };
   },
   props: {
-    isDraging: Boolean,
-    isHovering: Boolean
   },
-  methods: {},
+  methods: {
+  },
   components: {
     DragnDrop
   }
 };
 
-function fileDragOver(e) {
-  e.stopPropagation();
-  e.preventDefault();
-}
 </script>
 
 <style lang="scss" scoped>
-  #MIDIFrame {
-    height: 40%;
-    width: auto;
-    background-color: #2d2d2d;
+  #MIDISpace {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #252525;
   }
 </style>
